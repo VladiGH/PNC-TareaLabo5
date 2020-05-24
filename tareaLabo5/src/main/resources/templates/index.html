@@ -33,5 +33,10 @@
 	    </form>
 	    <br>
 	    <input type="button" onClick = "location.href='/listado';" value="Listado">
+	    <br><br>
+	    <form th:action = "@{/borrarEstudiante}" method="post">
+			<label>Borrar estudiante por codigo: </label><input type="number" name= "codigo"><br>
+			<input type ="submit" value="Borrar">
+		</form>
 </body>
 </html>

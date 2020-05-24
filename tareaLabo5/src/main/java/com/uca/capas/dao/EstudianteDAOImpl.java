@@ -34,4 +34,12 @@ public class EstudianteDAOImpl implements EstudianteDAO{
 		entityManager.persist(e);
 	}
 
+	@Override
+	@Transactional
+	public void delete(Integer codigoEstudiante) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Estudiante estudiante = entityManager.find(Estudiante.class, codigoEstudiante);
+		entityManager.remove(estudiante);
+	}
+
 }

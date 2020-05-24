@@ -2,16 +2,20 @@ package com.uca.capas.config;
 
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class JpaConfiguration {
 	
 	@Bean
@@ -45,5 +49,12 @@ public class JpaConfiguration {
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 		properties.setProperty("hibernate.enable_lazy_load_no_trans","true");
 		return properties;
+	}
+	
+	@Bean
+	JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory);
+		return transactionManager;
 	}
 }
